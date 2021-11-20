@@ -27,6 +27,10 @@ function App() {
     });
   }
 
+  const deleteCupcake = (id) =>{
+    Axios.delete(`http://localhost:5000/delete/${id}`)
+  };
+
   return (
     <div className="App container">
         <h1> Cupcakes App </h1>
@@ -57,7 +61,7 @@ function App() {
                 }}
                 />
                 <button onClick={()=> updateCupcake(val._id)} className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
-                <button className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
+                <button onClick={()=> deleteCupcake(val._id)} className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
               </div>
           )    
         })}

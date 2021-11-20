@@ -19,7 +19,7 @@ app.post("/insert", async (req, res) => {
     const cupcake = new CupcakesModel({name: name});
     try{
         await cupcake.save();
-        res.send(" inserted data");
+        res.send("Insercion exitosa");
     } catch(err){
         console.log(err);
     }
@@ -50,6 +50,13 @@ app.put("/update", async (req, res) => {
         console.log(err);
     }
 });
+
+app.delete("/delete/:id", async (req, res)=> {
+    const id = req.params.id;
+
+    await CupcakesModel.findByIdAndRemove(id).exec();
+    res.send("Eliminado")
+})
 
 app.listen(5000, () => {
     console.log("Servidor en el puerto 5000...");
