@@ -18,6 +18,7 @@ function App() {
     Axios.post("http://localhost:5000/insert",{
       name: name,
     });
+    window.location.reload();
   };
 
   const updateCupcake = (id) =>{
@@ -25,10 +26,12 @@ function App() {
       id:id,
       newCupName: newCupName,
     });
+    window.location.reload();
   }
 
   const deleteCupcake = (id) =>{
     Axios.delete(`http://localhost:5000/delete/${id}`)
+    window.location.reload();
   };
 
   return (
@@ -47,13 +50,12 @@ function App() {
         </div>
         <div className="container">
           <button onClick={addCupcake} className="m-10 bd-rad5 bg-color-yellow">Agregar Cupcake</button>
-          <button className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
         </div>
         <h1>Lista de cupcakes</h1>
 
         {cupcakeList.map((val, key)=>{
           return (
-              <div key={key} className="container">
+              <div key={key} className="container bg-color-a bd-rad2 m-10">
                 <h1> {val.name} </h1>
                 <input type="text" placeholder="Ingrese el nuevo nombre del cupcake" 
                   onChange={(event)=>{
