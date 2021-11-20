@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Axios from 'axios'
 import './App.css';
 
 function App() {
 
   const [name, setName] = useState("");
+
+  const [cupcakeList, setcupList] = useState([])
+
+  useEffect(()=>{
+    Axios.get("http://localhost:5000/read").then((response)=>{
+      setcupList(response.data);
+    });
+  }, [])
 
   const addCupcake = () => {
     Axios.post("http://localhost:5000/insert",{
@@ -32,6 +40,12 @@ function App() {
           <button className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
           <button className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
         </div>
+        <h1>Lista de cupcakes</h1>
+
+        {cupcakeList.map((val, key)=>{
+          return <div key={key}><h1> {val.name} </h1></div>
+        })}
+
     </div>
   );
 }
