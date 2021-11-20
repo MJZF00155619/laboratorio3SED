@@ -56,4 +56,9 @@ button{
   height: 2rem;
 }
 
-
+.fd-row{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}

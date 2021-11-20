@@ -26,7 +26,7 @@ function App() {
       id:id,
       newCupName: newCupName,
     });
-    window.location.reload();
+    alert("Porfavor recargue la pagina para ver los cambios reflejados")
   }
 
   const deleteCupcake = (id) =>{
@@ -52,22 +52,23 @@ function App() {
           <button onClick={addCupcake} className="m-10 bd-rad5 bg-color-yellow">Agregar Cupcake</button>
         </div>
         <h1>Lista de cupcakes</h1>
-
-        {cupcakeList.map((val, key)=>{
-          return (
-              <div key={key} className="container bg-color-a bd-rad2 m-10">
-                <h1> {val.name} </h1>
-                <input type="text" placeholder="Ingrese el nuevo nombre del cupcake" 
-                  onChange={(event)=>{
-                  setNewCup(event.target.value);
-                }}
-                />
-                <button onClick={()=> updateCupcake(val._id)} className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
-                <button onClick={()=> deleteCupcake(val._id)} className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
-              </div>
-          )    
-        })}
-
+        
+        <div className="fd-row">
+          {cupcakeList.map((val, key)=>{
+            return (
+                <div key={key} className="container bg-color-a bd-rad2 m-10">
+                  <h1> {val.name} </h1>
+                  <input type="text" placeholder="Ingrese el nuevo nombre del cupcake" 
+                    onChange={(event)=>{
+                    setNewCup(event.target.value);
+                  }}
+                  />
+                  <button onClick={()=> updateCupcake(val._id)} className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
+                  <button onClick={()=> deleteCupcake(val._id)} className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
+                </div>
+            )  
+          })}
+        </div>
     </div>
   );
 }
