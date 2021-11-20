@@ -35,6 +35,22 @@ app.get("/read", async (req, res) => {
     })
 });
 
+app.put("/update", async (req, res) => {
+
+    const newCupName = req.body.newCupName;
+    const id = req.body.id;
+
+    try{
+        await CupcakesModel.findById(id, (err, updatedCup)=>{
+            updatedCup.name = newCupName;
+            updatedCup.save();
+            res.send("update");
+        });
+    } catch(err){
+        console.log(err);
+    }
+});
+
 app.listen(5000, () => {
     console.log("Servidor en el puerto 5000...");
 });

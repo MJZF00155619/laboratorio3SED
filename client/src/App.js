@@ -5,8 +5,8 @@ import './App.css';
 function App() {
 
   const [name, setName] = useState("");
-
-  const [cupcakeList, setcupList] = useState([])
+  const [newCupName, setNewCup] = useState("")
+  const [cupcakeList, setcupList] = useState([]);
 
   useEffect(()=>{
     Axios.get("http://localhost:5000/read").then((response)=>{
@@ -19,6 +19,13 @@ function App() {
       name: name,
     });
   };
+
+  const updateCupcake = (id) =>{
+    Axios.put("http://localhost:5000/update", {
+      id:id,
+      newCupName: newCupName,
+    });
+  }
 
   return (
     <div className="App container">
@@ -36,14 +43,23 @@ function App() {
         </div>
         <div className="container">
           <button onClick={addCupcake} className="m-10 bd-rad5 bg-color-yellow">Agregar Cupcake</button>
-          <button className="m-10 bd-rad5 bg-color-yellow">Buscar Cupcake</button>
-          <button className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
           <button className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
         </div>
         <h1>Lista de cupcakes</h1>
 
         {cupcakeList.map((val, key)=>{
-          return <div key={key}><h1> {val.name} </h1></div>
+          return (
+              <div key={key} className="container">
+                <h1> {val.name} </h1>
+                <input type="text" placeholder="Ingrese el nuevo nombre del cupcake" 
+                  onChange={(event)=>{
+                  setNewCup(event.target.value);
+                }}
+                />
+                <button onClick={()=> updateCupcake(val._id)} className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
+                <button className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
+              </div>
+          )    
         })}
 
     </div>
