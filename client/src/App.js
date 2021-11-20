@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React, { useState } from "react";
+import Axios from 'axios'
 import './App.css';
 
 function App() {
+
+  const [name, setName] = useState("");
+
+  const addCupcake = () => {
+    Axios.post("http://localhost:5000/insert",{
+      name: name,
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App container">
+        <h1> Cupcakes App </h1>
+        <div className="m-50 bg-color-orange wd-50 bd-rad2">
+          <div className="container mtop-3 mbot-3">
+            <label className="m-10 ">Agrega un tipo de Cupcake (ej: chocolate, vainilla, etc)</label>
+            <input 
+              type="text"
+              onChange={(event)=>{
+                setName(event.target.value);
+              }}
+              />
+          </div>
+        </div>
+        <div className="container">
+          <button onClick={addCupcake} className="m-10 bd-rad5 bg-color-yellow">Agregar Cupcake</button>
+          <button className="m-10 bd-rad5 bg-color-yellow">Buscar Cupcake</button>
+          <button className="m-10 bd-rad5 bg-color-yellow">Eliminar Cupcake</button>
+          <button className="m-10 bd-rad5 bg-color-yellow">Actualizar Cupcake</button>
+        </div>
     </div>
   );
 }
